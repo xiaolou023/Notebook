@@ -206,8 +206,6 @@ git commit -m "delete test.txt"
 
 ⚡情景一：先有本地仓库，后有远程仓库，关联远程仓库
 
-关联本地仓库和远程仓库
-
 ```bash
 git remote add origin git@github.com:xiaolou023/Notebook.git # origin 是远程仓库默认的名字
 ```
@@ -221,10 +219,22 @@ git push orgin master # 之后
 
 ⚡情景二：先构建远程仓库，然后从远程仓库克隆
 
-复制远程仓库
-
 ```bash
 git clone git@github.com:xiaolou023/Notebook.git
+```
+
+查看远程库
+
+```bash
+git remote
+git remote -v # 查看更详细的信息
+```
+
+推送分支
+
+```bash
+git push origin master
+git push origin dev # 推送其他分支
 ```
 
 ### 创建分支
@@ -254,7 +264,6 @@ git switch dev # 切换分支
 合并分支
 
 ```bash
-git merge dev # 合并分支，删除dev分支
 git merge --no-ff -m "merge with no-ff" dev # 禁用fast-forward模式，保留dev分支的信息
 ```
 
@@ -270,6 +279,96 @@ git branch
 git log --graph # 查看分支合并图
 git log --graph --pretty=oneline --abbrev-commit
 ```
+
+### BUG分支
+
+保存现在分支的未完成状态，创建一个新的bug分支开展临时工作，完成临时工作后再回到当前分支继续未完成的工作。
+
+保存现在分支的未完成状态
+
+```bash
+git stash
+```
+
+完成临时工作后，回到现场
+
+```bash
+git stash list # 查看
+git stash pop # 恢复现场并删除stash
+```
+
+```bash
+git stash apply # 恢复现场
+git stash drop # 删除
+```
+
+dev作为master的分出来的分支，将master上修复的bug分支复制到dev分支
+
+```bash
+git checkout dev # 切换到dev分支
+git cherry-pick 4c805e2 # 复制 bug分支 4c805e2为commit-id
+```
+
+### 多人协作
+
+1. 创建远程的分支到本地
+
+   ```bash
+   git checkout -b dev origin/dev
+   ```
+
+2. 修改完成后试图用`git push origin dev`推送自己的修改
+
+3. 如果推送失败，则因为远程分支比你的本地更新，需要先用`git pull`把最新的提交从origin/dev抓取下来
+
+4. 如果合并有冲突，则解决冲突，并在本地提交
+
+5. 没有冲突或者解决掉冲突后，再用`git push origin dev`推送就能成功！
+
+⚡ 情景一：在本地创建和远程分支对应的分支
+
+```bash
+git checkout -b dev origin/dev
+```
+
+⚡情景二：建立本地分支和远程分支的关联
+
+   ```bash
+git branch --set-upstream-to=origin/dev dev
+   ```
+
+### 标签
+
+创建标签
+
+```bash
+git tag v1.0 # 给最新的commit打标签
+git tag v0.9 f52c633 # 给对应的commit打标签
+git tag -a v0.1 -m "version 0.1 released" # 带有备注的标签
+```
+
+查看标签
+
+```bash
+git tag # 查看所有标签
+git show v1.0 # 查看某一标签的具体信息
+```
+
+删除标签
+
+```bash
+git tag -d v1.0 # 本地删除
+git push origin :refs/tags/v0.9 # 远程库删除
+```
+
+推送标签
+
+```bash
+git push origin v1.0 # 指定标签
+git push origin --tags # 所有标签
+```
+
+### .gitignore文件
 
 
 
