@@ -4,13 +4,7 @@
 
 ### 创建仓库
 
-第一步，先创建并进入一个名为learn的空目录
-
-```bash
-mkdir learn
-cd learn
-pwd # 显示当前目录
-```
+第一步，先创建并进入一个空目录
 
 第二步，仓库初始化
 
@@ -58,7 +52,7 @@ git reflog # 记录每次修改的commit-id
 
 ### 管理修改
 
-工作区（本地）、暂存区和仓库（远程）
+工作区、暂存区和仓库
 
 把文件往Git仓库里添加的时候，是分两步执行的：
 
@@ -67,7 +61,7 @@ git reflog # 记录每次修改的commit-id
 - 第二步是用`git commit`提交更改，实际上就是把暂存区的所有内容提交到当前分支（如master）
 
 ```bash
-git diff HEAD -- readme.txt # 查看本地和仓库最新版本的区别
+git diff HEAD -- readme.txt # 查看工作区和仓库最新版本的区别
 ```
 
 ### 撤销修改
@@ -111,7 +105,7 @@ git commit -m "delete test.txt"
 ⚡情景一：先有本地仓库，后有远程仓库，关联远程仓库
 
 ```bash
-git remote add origin git@github.com:xiaolou023/Notebook.git # origin 是远程仓库默认的名字
+git remote add origin git@github.com:yourname/Notebook.git # origin 是远程仓库默认的名字
 ```
 
 把本地仓库的内容推送到远程仓库
@@ -124,7 +118,7 @@ git push orgin master # 之后
 ⚡情景二：先构建远程仓库，然后从远程仓库克隆
 
 ```bash
-git clone git@github.com:xiaolou023/Notebook.git
+git clone git@github.com:yourname/Notebook.git
 ```
 
 查看远程库
@@ -168,6 +162,7 @@ git switch dev # 切换分支
 合并分支
 
 ```bash
+git merge dev # 合并到当前分支,fast-forward模式
 git merge --no-ff -m "merge with no-ff" dev # 禁用fast-forward模式，保留dev分支的信息
 ```
 
@@ -223,19 +218,19 @@ git cherry-pick 4c805e2 # 复制 bug分支 4c805e2为commit-id
 
 2. 修改完成后试图用`git push origin dev`推送自己的修改
 
-3. 如果推送失败，则因为远程分支比你的本地更新，需要先用`git pull`把最新的提交从origin/dev抓取下来
+3. 如果推送失败，则是因为远程分支比你的本地更新，需要先用`git pull`把最新的提交从origin/dev抓取下来
 
 4. 如果合并有冲突，则解决冲突，并在本地提交
 
 5. 没有冲突或者解决掉冲突后，再用`git push origin dev`推送就能成功！
 
-⚡ 情景一：在本地创建和远程分支对应的分支
+⚡ 在本地创建和远程分支对应的分支
 
 ```bash
 git checkout -b dev origin/dev
 ```
 
-⚡情景二：建立本地分支和远程分支的关联
+⚡建立本地分支和远程分支的关联
 
    ```bash
 git branch --set-upstream-to=origin/dev dev
@@ -274,7 +269,7 @@ git push origin --tags # 所有标签
 
 ### .gitignore文件
 
-
+过滤文件
 
 
 
