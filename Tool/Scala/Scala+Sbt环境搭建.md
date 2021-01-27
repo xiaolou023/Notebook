@@ -1,5 +1,16 @@
 ## IDEA+sbt+Scala环境搭建
 
+更新📅2021年1月27日
+
+如何配置环境并导入sbt-based scala项目
+
+1. 下载安装jdk 默认安装 配置环境变量
+2. 下载安装sbt 默认安装 （无需安装scala，无需cmd + sbt）
+3. IDEA加载scala插件
+4. IDEA--Open folder即可 （第一次从build.sbt导入project会花很久）
+
+---
+
 [CSDN步骤简述](https://blog.csdn.net/l912943297/article/details/80755192)
 
 1. 下载JDK，sbt，Scala，IDEA
